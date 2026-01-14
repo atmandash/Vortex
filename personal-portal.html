@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portal - SEPLUS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> SEPLUS</a>
+            <nav class="main-nav"><a href="index.html" class="nav-link">Home</a></nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 4rem 0; display: flex; justify-content: center;">
+        <div class="card animate-fade-in" style="width: 100%; max-width: 450px;">
+            <div style="display: flex; border-bottom: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+                <button id="tab-login" class="btn"
+                    style="flex: 1; border-radius: 0; border-bottom: 2px solid var(--primary-blue); color: var(--primary-blue); font-weight: 600;">Log
+                    In</button>
+                <button id="tab-register" class="btn"
+                    style="flex: 1; border-radius: 0; border-bottom: 2px solid transparent; color: var(--text-muted);">New
+                    User</button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <div id="view-login">
+                <div class="text-center mb-lg">
+                    <h3>Patient Login</h3>
+                    <p>Enter your Patient ID and Password.</p>
+                </div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label>Patient ID</label>
+                        <input type="text" id="login-id" placeholder="PAT-XXXXX" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="login-pass" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Access Dashboard</button>
+                </form>
+            </div>
+
+            <!-- REGISTER FORM -->
+            <div id="view-register" style="display: none;">
+                <div class="text-center mb-lg">
+                    <h3>New Registration</h3>
+                    <p>Get your unique Patient ID.</p>
+                </div>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="reg-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number </label>
+                        <input type="tel" id="reg-phone" placeholder="10-digit mobile number" pattern="[0-9]{10}"
+                            title="10 digit mobile number" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Generate ID</button>
+                </form>
+
+                <!-- SUCCESS & CREDENTIALS DISPLAY -->
+                <div id="reg-success"
+                    style="display: none; background: #ecfdf5; border: 1px solid #10b981; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; text-align: center;">
+                    <h4 style="color: #047857; margin-bottom: 0.5rem;"><i class="fa-solid fa-check-circle"></i>
+                        Registration Successful</h4>
+                    <p style="color: #065f46; font-size: 0.9rem; margin-bottom: 1rem;">Please SAVE these credentials.
+                        You will need them to login.</p>
+
+                    <div
+                        style="background: white; padding: 1rem; border-radius: 6px; border: 1px dashed #059669; text-align: left;">
+                        <p><strong>Patient ID:</strong> <span id="new-pid"
+                                style="font-family: monospace; font-size: 1.1rem;"></span></p>
+                        <p><strong>Password:</strong> <span id="new-pass"
+                                style="font-family: monospace; font-size: 1.1rem;"></span></p>
+                    </div>
+
+                    <button id="btn-goto-login" class="btn btn-sm btn-outline" style="margin-top: 1rem; width: 100%;">Go
+                        to Login</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        const tabLogin = document.getElementById('tab-login');
+        const tabRegister = document.getElementById('tab-register');
+        const viewLogin = document.getElementById('view-login');
+        const viewRegister = document.getElementById('view-register');
+
+        // Tab Switching
+        tabLogin.addEventListener('click', () => {
+            viewLogin.style.display = 'block';
+            viewRegister.style.display = 'none';
+            tabLogin.style.borderBottomColor = 'var(--primary-blue)';
+            tabLogin.style.color = 'var(--primary-blue)';
+            tabRegister.style.borderBottomColor = 'transparent';
+            tabRegister.style.color = 'var(--text-muted)';
+        });
+
+        tabRegister.addEventListener('click', () => {
+            viewLogin.style.display = 'none';
+            viewRegister.style.display = 'block';
+            tabRegister.style.borderBottomColor = 'var(--primary-blue)';
+            tabRegister.style.color = 'var(--primary-blue)';
+            tabLogin.style.borderBottomColor = 'transparent';
+            tabLogin.style.color = 'var(--text-muted)';
+        });
+
+        // Register Logic
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fullName = document.getElementById('reg-name').value;
+            const phoneNumber = document.getElementById('reg-phone').value;
+
+            try {
+                const res = await fetch('/api/personal/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fullName, phoneNumber })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    document.getElementById('register-form').style.display = 'none';
+                    document.getElementById('reg-success').style.display = 'block';
+                    document.getElementById('new-pid').textContent = data.patientId;
+                    document.getElementById('new-pass').textContent = data.password;
+                } else {
+                    alert("Registration Error: " + data.message);
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Connection failed. Please ensure the server is running (node server.js).');
+            }
+        });
+
+        // Login Logic
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const patientId = document.getElementById('login-id').value;
+            const password = document.getElementById('login-pass').value;
+
+            try {
+                const res = await fetch('/api/personal/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ patientId, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    localStorage.setItem('sepsis_user', JSON.stringify(data.user));
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert("Login Error: " + data.message);
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Connection failed. Please ensure the server is running.');
+            }
+        });
+
+        document.getElementById('btn-goto-login').addEventListener('click', () => {
+            tabLogin.click();
+        });
+    </script>
+    <footer style="background: var(--primary-dark); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2026 SEPLUS. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

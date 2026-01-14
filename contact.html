@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - SEPLUS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-heart-pulse"></i>
+                SEPLUS
+            </a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Home</a>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn">Services <i class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="doctors.html">Find a Doctor</a>
+                        <a href="hospitals.html">Nearby Hospitals</a>
+                        <a href="appointment.html">Book Appointment</a>
+                        <a href="donation.html">Donate</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn">Resources <i class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="news.html">Newsroom</a>
+                        <a href="articles.html">Articles</a>
+                        <a href="media.html">Media & Videos</a>
+                        <a href="events.html">Events</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn" style="color: var(--primary-blue);">About <i
+                            class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="about-us.html">About Us</a>
+                        <a href="contact.html">Contact Us</a>
+                        <a href="faq.html">FAQs</a>
+                        <a href="terms.html">Terms of Use</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" style="padding: 2.5rem 0;">
+            <div class="container">
+                <h1 style="margin-bottom: 0.5rem; font-size: 2.5rem;">Contact Us</h1>
+                <p style="margin-bottom: 0;">Have questions or feedback? We'd love to hear from you.</p>
+            </div>
+        </section>
+
+        <section class="section" style="padding: 1rem 0;">
+            <div class="container">
+                <div class="grid-2" style="gap: 1.5rem; align-items: start;">
+                    <div class="card" style="padding: 1.25rem; height: auto !important;">
+                        <h3>Get in Touch</h3>
+                        <form onsubmit="event.preventDefault(); alert('Message sent! (Demo only)');">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" required placeholder="Dr. Jane Doe">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" required placeholder="d.brown@clinic.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea rows="5" required placeholder="How can we help?"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+                        </form>
+                    </div>
+                    <div>
+                        <div class="card mb-sm"
+                            style="padding: 0.75rem 1.25rem; margin-bottom: 0.75rem; height: auto !important;">
+                            <h3><i class="fa-solid fa-location-dot" style="color: var(--primary-blue);"></i> Visit Us
+                            </h3>
+                            <p>VIT Chennai<br>Vandalur-Kelambakkam Road<br>Chennai, Tamil Nadu 600127</p>
+                        </div>
+                        <div class="card" style="padding: 0.75rem 1.25rem; height: auto !important;">
+                            <h3><i class="fa-solid fa-envelope" style="color: var(--primary-blue);"></i> Email Us</h3>
+                            <p><strong>Support:</strong> support@SEPLUS.com</p>
+                            <p><strong>Partnerships:</strong> partners@SEPLUS.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--primary-dark); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2026 SEPLUS. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

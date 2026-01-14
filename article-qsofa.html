@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding qSOFA Scores - SEPLUS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> SEPLUS</a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Home</a>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn">Services <i class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="doctors.html">Find a Doctor</a>
+                        <a href="hospitals.html">Nearby Hospitals</a>
+                        <a href="appointment.html">Book Appointment</a>
+                        <a href="donation.html">Donate</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn" style="color: var(--primary-blue);">Resources <i
+                            class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="news.html">Newsroom</a>
+                        <a href="articles.html">Articles</a>
+                        <a href="media.html">Media & Videos</a>
+                        <a href="events.html">Events</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn">About <i class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="about-us.html">About Us</a>
+                        <a href="contact.html">Contact Us</a>
+                        <a href="faq.html">FAQs</a>
+                        <a href="terms.html">Terms of Use</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Log In</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="animate-fade-in" style="padding-top: 4rem;">
+        <article class="container" style="max-width: 800px;">
+            <div class="article-breadcrumbs animate-fade-in delay-100">
+                <a href="articles.html"><i class="fa-solid fa-arrow-left"></i> Back to Articles</a>
+                <span>/</span>
+                <span>Clinical Protocols</span>
+            </div>
+
+            <header class="article-header animate-fade-in delay-200">
+                <span class="badgex"
+                    style="background: #dbeafe; color: #1e40af; margin-bottom: 1rem; display: inline-block;">Clinical
+                    Protocols</span>
+                <h1 style="font-size: 2.75rem; color: var(--primary-dark); line-height: 1.2;">Understanding qSOFA Scores
+                </h1>
+                <div class="article-meta">
+                    <span><i class="fa-regular fa-calendar"></i> Jan 04, 2026</span>
+                    <span><i class="fa-regular fa-user"></i> By Clinical Staff</span>
+                    <span><i class="fa-regular fa-clock"></i> 5 min read</span>
+                </div>
+            </header>
+
+            <div class="news-hero-visual"
+                style="width: 100%; height: 400px; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border-radius: var(--radius-lg); margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border: 1px solid rgba(167, 139, 250, 0.3);">
+                <i class="fa-solid fa-chart-line fa-5x"
+                    style="color: #a78bfa; filter: drop-shadow(0 0 20px rgba(167, 139, 250, 0.5));"></i>
+            </div>
+
+            <div class="article-content animate-fade-in delay-400">
+                <p>
+                    <strong>The Quick Sequential Organ Failure Assessment (qSOFA)</strong> score is a bedside prompt
+                    that may identify patients with suspected infection who are at greater risk for a poor outcome
+                    outside the intensive care unit (ICU). It uses three simple criteria, assigning one point for low
+                    blood pressure (systolic < 100 mmHg), high respiratory rate (> 22 breaths/min), or altered mentation
+                        (GCS < 15). </p>
+                            <p>
+                                Despite debates over its sensitivity versus SIRS, qSOFA remains a crucial tool for rapid
+                                triage due to its simplicity. It requires no laboratory tests, making it immediately
+                                applicable in emergency departments and general wards worldwide.
+                            </p>
+
+                            <h3>The 3 Criteria (HAT)</h3>
+                            <ul>
+                                <li><strong>Hypotension:</strong> Systolic blood pressure ≤ 100 mmHg.</li>
+                                <li><strong>Altered Mental Status:</strong> Any score less than 15 on the Glasgow Coma
+                                    Scale, or simply being confused/disoriented.</li>
+                                <li><strong>Tachypnea:</strong> Respiratory rate ≥ 22 breaths per minute.</li>
+                            </ul>
+                            <p>
+                                A qSOFA score of ≥ 2 suggests a greater risk of a poor outcome. These patients should be
+                                assessed for evidence of organ dysfunction and monitored closely.
+                            </p>
+
+                            <h3>Limitations and Context</h3>
+                            <p>
+                                It is important to note that qSOFA is a <strong>prognostic</strong> tool, not a
+                                diagnostic one. A low qSOFA score does not rule out sepsis, but a high score is a strong
+                                red flag for likely deterioration.
+                            </p>
+                            <h3>References</h3>
+                            <ul class="references-list" style="font-size: 0.9rem; color: var(--text-muted);">
+                                <li>Seymour CW, Liu VX, Iwashyna TJ, et al. Assessment of Clinical Criteria for Sepsis.
+                                    <em>JAMA</em>. 2016;315(8):762-774.
+                                </li>
+                                <li>Singer M, Deutschman CS, Seymour CW, et al. The Third International Consensus
+                                    Definitions for Sepsis and Septic Shock (Sepsis-3). <em>JAMA</em>.
+                                    2016;315(8):801-810.</li>
+                            </ul>
+            </div>
+        </article>
+    </main>
+
+    <footer
+        style="background: rgba(255, 255, 255, 0.5); border-top: 1px solid rgba(139, 92, 246, 0.1); padding: 1.5rem 0; text-align: center;">
+        <div class="container">
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0;">&copy; 2026 SEPLUS. All rights
+                reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

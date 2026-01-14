@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media & Videos - SEPLUS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> SEPLUS</a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Home</a>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn">Services <i class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="doctors.html">Find a Doctor</a>
+                        <a href="hospitals.html">Nearby Hospitals</a>
+                        <a href="appointment.html">Book Appointment</a>
+                        <a href="donation.html">Donate</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn" style="color: var(--primary-blue);">Resources <i
+                            class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="news.html">Newsroom</a>
+                        <a href="articles.html">Articles</a>
+                        <a href="media.html">Media & Videos</a>
+                        <a href="events.html">Events</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn">About <i class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="about-us.html">About Us</a>
+                        <a href="contact.html">Contact Us</a>
+                        <a href="faq.html">FAQs</a>
+                        <a href="terms.html">Terms of Use</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section style="background: linear-gradient(180deg, #f8f0ff 0%, #ffffff 100%); padding: 5rem 0 7rem;">
+        <div class="container text-center animate-fade-in">
+            <span class="badgex"
+                style="background: white; color: var(--primary-blue); margin-bottom: 1rem; border: 1px solid var(--border-color);">Multimedia
+                Library</span>
+            <h1 style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary-dark);">Videos & Education</h1>
+            <p class="lead" style="max-width: 600px; margin: 0 auto; color: var(--text-color);">
+                Watch expert explainers, survivor stories, and educational guides to better understand sepsis.
+            </p>
+        </div>
+    </section>
+
+    <!-- Video Grid Section -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="grid-2 animate-fade-in delay-300">
+
+                <!-- Video 1 -->
+                <div class="news-card">
+                    <div class="video-container" id="video-1"
+                        style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px 8px 0 0; background: #000;">
+                        <div class="video-thumbnail"
+                            onclick="this.parentElement.innerHTML='<iframe style=\'position: absolute; top: 0; left: 0; width: 100%; height: 100%;\' src=\'https://www.youtube.com/embed/6NdLnHbLZMU?autoplay=1\' title=\'What is Sepsis?\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen></iframe>'">
+                            <img src="https://img.youtube.com/vi/6NdLnHbLZMU/maxresdefault.jpg" alt="Video Thumbnail"
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;"
+                                onerror="this.onerror=null; this.src='https://img.youtube.com/vi/6NdLnHbLZMU/hqdefault.jpg';">
+                            <div class="play-button"><i class="fa-solid fa-play"></i></div>
+                        </div>
+                    </div>
+                    <div class="news-card-body">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">What is Sepsis?</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                            Sepsis Alliance explains the basics of sepsis, why it's a medical emergency, and the signs
+                            you need to know.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="news-card">
+                    <div class="video-container" id="video-2"
+                        style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px 8px 0 0; background: #000;">
+                        <div class="video-thumbnail"
+                            onclick="this.parentElement.innerHTML='<iframe style=\'position: absolute; top: 0; left: 0; width: 100%; height: 100%;\' src=\'https://www.youtube.com/embed/GKRQm0i5JdI?autoplay=1\' title=\'Ways to Prevent Sepsis\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen></iframe>'">
+                            <img src="https://img.youtube.com/vi/GKRQm0i5JdI/hqdefault.jpg" alt="Video Thumbnail"
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;"
+                                onerror="this.onerror=null; this.src='https://img.youtube.com/vi/GKRQm0i5JdI/default.jpg';">
+                            <div class="play-button"><i class="fa-solid fa-play"></i></div>
+                        </div>
+                    </div>
+                    <div class="news-card-body">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Ways to Prevent Sepsis</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                            The CDC outlines the key steps every family should take to prevent infections that can
+                            lead to sepsis.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="news-card">
+                    <div class="video-container" id="video-3"
+                        style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px 8px 0 0; background: #000;">
+                        <div class="video-thumbnail"
+                            onclick="this.parentElement.innerHTML='<iframe style=\'position: absolute; top: 0; left: 0; width: 100%; height: 100%;\' src=\'https://www.youtube.com/embed/ZKX3HqE3eFg?autoplay=1\' title=\'Everything you need to know about sepsis\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen></iframe>'">
+                            <img src="https://img.youtube.com/vi/ZKX3HqE3eFg/hqdefault.jpg" alt="Video Thumbnail"
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;"
+                                onerror="this.onerror=null; this.src='https://img.youtube.com/vi/ZKX3HqE3eFg/default.jpg';">
+                            <div class="play-button"><i class="fa-solid fa-play"></i></div>
+                        </div>
+                    </div>
+                    <div class="news-card-body">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Everything you need to know about sepsis
+                        </h3>
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                            A comprehensive guide covering causes, symptoms, and treatments to help you understand this
+                            condition.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Video 4 -->
+                <div class="news-card">
+                    <div class="video-container" id="video-4"
+                        style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px 8px 0 0; background: #000;">
+                        <div class="video-thumbnail"
+                            onclick="this.parentElement.innerHTML='<iframe style=\'position: absolute; top: 0; left: 0; width: 100%; height: 100%;\' src=\'https://www.youtube.com/embed/qVy_7shA3RM?autoplay=1\' title=\'Sepsis and Septic Shock\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen></iframe>'">
+                            <img src="https://img.youtube.com/vi/qVy_7shA3RM/hqdefault.jpg" alt="Video Thumbnail"
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;"
+                                onerror="this.onerror=null; this.src='https://img.youtube.com/vi/qVy_7shA3RM/default.jpg';">
+                            <div class="play-button"><i class="fa-solid fa-play"></i></div>
+                        </div>
+                    </div>
+                    <div class="news-card-body">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Sepsis and Septic Shock</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                            Understanding the progression from infection to severe septic shock and the medical
+                            interventions required.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+        <footer style="background: var(--primary-dark); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2026 SEPLUS. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

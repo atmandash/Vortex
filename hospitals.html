@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Hospitals - SEPLUS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo" id="top-logo">
+                <i class="fa-solid fa-heart-pulse"></i>
+                SEPLUS
+            </a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Home</a>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn" style="color: var(--primary-blue);">Services <i
+                            class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="doctors.html">Find a Doctor</a>
+                        <a href="hospitals.html">Nearby Hospitals</a>
+                        <a href="appointment.html">Book Appointment</a>
+                        <a href="donation.html">Donate</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn">Resources <i class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="news.html">Newsroom</a>
+                        <a href="articles.html">Articles</a>
+                        <a href="media.html">Media & Videos</a>
+                        <a href="events.html">Events</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn">About <i class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="about-us.html">About Us</a>
+                        <a href="contact.html">Contact Us</a>
+                        <a href="faq.html">FAQs</a>
+                        <a href="terms.html">Terms of Use</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Modern Hero Search -->
+        <section class="hero"
+            style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; padding: 6rem 0;">
+            <div class="container text-center animate-fade-in">
+                <h1 style="color: white; margin-bottom: 1rem;">Find Nearby Care</h1>
+                <p class="lead" style="color: #94a3b8; max-width: 600px; margin: 0 auto 2rem;">
+                    Locate specialized sepsis treatment centers with 24/7 emergency services nearest to you.
+                </p>
+                <div
+                    style="max-width: 600px; margin: 0 auto; display: flex; gap: 0.5rem; background: white; padding: 0.5rem; border-radius: 50px;">
+                    <button class="btn" style="background: none; color: var(--text-muted);"><i
+                            class="fa-solid fa-location-dot"></i></button>
+                    <input type="text" placeholder="Enter your city or zip code..."
+                        style="flex: 1; border: none; outline: none; font-size: 1rem;">
+                    <button class="btn btn-primary" style="border-radius: 50px; padding: 0.75rem 2rem;">Search</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hospital List -->
+        <section class="section" style="background-color: #f8fafc;">
+            <div class="container">
+                <div class="grid-2" style="grid-template-columns: 1fr; gap: 2rem;">
+                    <div>
+                        <div
+                            style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                            <h2 style="font-size: 1.5rem;">Results Near You</h2>
+                            <select id="hospitalSort"
+                                style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #cbd5e1; outline: none; background: white; color: #475569; font-size: 0.9rem; cursor: pointer;">
+                                <option value="distance">Sort by: Distance</option>
+                                <option value="rating">Sort by: Rating (High to Low)</option>
+                            </select>
+                        </div>
+
+                        <div id="hospitalList">
+                            <!-- Hospital 1 -->
+                            <div class="card animate-fade-in delay-100" data-rating="4.5" data-distance="1.2"
+                                style="margin-bottom: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                                <div
+                                    style="width: 80px; height: 80px; background: #fee2e2; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #ef4444;">
+                                    <i class="fa-solid fa-hospital fa-2x"></i>
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                        <h3 style="font-size: 1.25rem;">City General Hospital</h3>
+                                        <span class="tag-premium tag-sepsis"><i class="fa-solid fa-certificate"></i>
+                                            Sepsis Center</span>
+                                    </div>
+                                    <div
+                                        style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                        <div style="color: #fbbf24; font-size: 0.9rem;">
+                                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                                class="fa-solid fa-star-half-stroke"></i>
+                                        </div>
+                                        <span style="font-size: 0.85rem; color: var(--text-muted);">4.5 (120
+                                            Reviews)</span>
+                                    </div>
+                                    <p style="color: var(--text-color); margin-bottom: 0.5rem;">
+                                        <i class="fa-solid fa-location-arrow" style="color: var(--primary-blue);"></i>
+                                        1.2
+                                        miles away &bull; 123 Healthcare Blvd, Downtown
+                                    </p>
+                                    <div
+                                        style="display: flex; gap: 1rem; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                                        <span><i class="fa-regular fa-clock"></i> Open 24/7</span>
+                                        <span><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</span>
+                                    </div>
+                                    <div style="display: flex; gap: 1rem;">
+                                        <button class="btn btn-primary btn-sm">Get Directions</button>
+                                        <button class="btn btn-outline btn-sm">Call Emergency</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hospital 2 -->
+                            <div class="card animate-fade-in delay-200" data-rating="4.0" data-distance="3.5"
+                                style="margin-bottom: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                                <div
+                                    style="width: 80px; height: 80px; background: #e0f2fe; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #0284c7;">
+                                    <i class="fa-solid fa-hospital-user fa-2x"></i>
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                        <h3 style="font-size: 1.25rem;">St. Mary's Clinic</h3>
+                                        <span class="tag-premium tag-urgent">Urgent Care</span>
+                                    </div>
+                                    <div
+                                        style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                        <div style="color: #fbbf24; font-size: 0.9rem;">
+                                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                                class="fa-regular fa-star"></i>
+                                        </div>
+                                        <span style="font-size: 0.85rem; color: var(--text-muted);">4.0 (85
+                                            Reviews)</span>
+                                    </div>
+                                    <p style="color: var(--text-color); margin-bottom: 0.5rem;">
+                                        <i class="fa-solid fa-location-arrow" style="color: var(--primary-blue);"></i>
+                                        3.5
+                                        miles away &bull; 45 Medical Park Dr
+                                    </p>
+                                    <div
+                                        style="display: flex; gap: 1rem; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                                        <span><i class="fa-regular fa-clock"></i> Closes 8 PM</span>
+                                        <span><i class="fa-solid fa-phone"></i> +1 (555) 987-6543</span>
+                                    </div>
+                                    <div style="display: flex; gap: 1rem;">
+                                        <button class="btn btn-primary btn-sm">Get Directions</button>
+                                        <button class="btn btn-outline btn-sm">Call Reception</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hospital 3 -->
+                            <div class="card animate-fade-in delay-300" data-rating="4.9" data-distance="5.8"
+                                style="margin-bottom: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                                <div
+                                    style="width: 80px; height: 80px; background: #f3e8ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #9333ea;">
+                                    <i class="fa-solid fa-truck-medical fa-2x"></i>
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                        <h3 style="font-size: 1.25rem;">Northside Trauma Center</h3>
+                                        <span class="tag-premium tag-trauma"><i class="fa-solid fa-certificate"></i>
+                                            Level 1 Trauma</span>
+                                    </div>
+                                    <div
+                                        style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                        <div style="color: #fbbf24; font-size: 0.9rem;">
+                                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                                class="fa-solid fa-star"></i>
+                                        </div>
+                                        <span style="font-size: 0.85rem; color: var(--text-muted);">4.9 (210
+                                            Reviews)</span>
+                                    </div>
+                                    <p style="color: var(--text-color); margin-bottom: 0.5rem;">
+                                        <i class="fa-solid fa-location-arrow" style="color: var(--primary-blue);"></i>
+                                        5.8
+                                        miles away &bull; 889 Emergency Ln
+                                    </p>
+                                    <div
+                                        style="display: flex; gap: 1rem; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                                        <span><i class="fa-regular fa-clock"></i> Open 24/7</span>
+                                        <span><i class="fa-solid fa-phone"></i> +1 (555) 555-0199</span>
+                                    </div>
+                                    <div style="display: flex; gap: 1rem;">
+                                        <button class="btn btn-primary btn-sm">Get Directions</button>
+                                        <button class="btn btn-outline btn-sm">Call Emergency</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+        <footer style="background: var(--primary-dark); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2026 SEPLUS. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Login Type - SEPLUS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .choice-card {
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .choice-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-blue);
+        }
+    </style>
+</head>
+
+<body >
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> SEPLUS</a>
+            <nav class="main-nav"><a href="index.html" class="nav-link">Home</a></nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 4rem 0;">
+        <div class="text-center mb-lg animate-fade-in">
+            <h2>Select Access Type</h2>
+            <p>Please choose how you would like to proceed with the screening.</p>
+        </div>
+
+        <div class="grid-2 animate-fade-in delay-300" style="max-width: 800px; margin: 0 auto; gap: 2rem;">
+            <!-- Personal Login -->
+            <a href="personal-portal.html" style="text-decoration: none; color: inherit;">
+                <div class="card choice-card text-center" style="padding: 3rem 2rem;">
+                    <div
+                        style="width: 80px; height: 80px; background: #eff6ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                        <i class="fa-solid fa-user fa-3x" style="color: var(--primary-blue);"></i>
+                    </div>
+                    <h3 style="margin-bottom: 1rem;">Personal User</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                        For individuals. Register with your phone number to get a Patient ID. Securely assess your own
+                        risk.
+                    </p>
+                    <span class="btn btn-primary btn-outline" style="width: 100%;">Continue as Personal</span>
+                </div>
+            </a>
+
+            <!-- Hospital Login -->
+            <a href="hospital-login.html" style="text-decoration: none; color: inherit;">
+                <div class="card choice-card text-center" style="padding: 3rem 2rem;">
+                    <div
+                        style="width: 80px; height: 80px; background: #fdf2f8; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                        <i class="fa-solid fa-hospital-user fa-3x" style="color: #be185d;"></i>
+                    </div>
+                    <h3 style="margin-bottom: 1rem;">Hospital Staff</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                        For clinicians. Enter Hospital ID and Ward details to perform rapid patient screening.
+                    </p>
+                    <span class="btn btn-outline"
+                        style="width: 100%; color: #be185d; box-shadow: 0 2px 4px rgba(190, 24, 93, 0.2);">Continue
+                        as Hospital</span>
+                </div>
+            </a>
+        </div>
+    </main>
+
+        <footer style="background: var(--primary-dark); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2026 SEPLUS. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Screening - SEPLUS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="auth.js"></script>
+</head>
+
+<body >
+    <!-- Hospital Header -->
+    <header style="background: white; border-bottom: 1px solid var(--border-color); padding: 1rem 0;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <span class="logo"><i class="fa-solid fa-heart-pulse"></i> SEPLUS</span>
+                <span class="badgex" style="background: #fdf2f8; color: #be185d;">Hospital Mode</span>
+            </div>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <span style="font-weight: 600; color: var(--text-muted);">ID: <span
+                        id="disp-hospital-id">...</span></span>
+                <button onclick="window.location.reload()" class="btn btn-sm"
+                    style="background: #be185d; color: white;">
+                    <i class="fa-solid fa-plus"></i> Add New Patient
+                </button>
+                <a href="index.html" class="btn btn-sm btn-outline" style="border-color: var(--border-color);">
+                    <i class="fa-solid fa-house"></i> Home Page
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 2rem 0;">
+        <div class="grid-2" style="align-items: start; gap: 2rem;">
+
+            <!-- Details Form -->
+            <div class="card">
+                <h3><i class="fa-solid fa-bed-pulse"></i> Patient Vitals</h3>
+                <form id="hospital-screening-form">
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="flex: 1;">
+                            <label>Ward Number</label>
+                            <input type="text" id="wardNo" required>
+                        </div>
+                        <div style="flex: 1;">
+                            <label>Bed Number</label>
+                            <input type="text" id="bedNo" required>
+                        </div>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
+
+                    <div class="form-group">
+                        <label>Respiratory Rate (breaths/min)</label>
+                        <input type="number" id="resp" placeholder="e.g. 18" required>
+                        <small class="text-muted">High Risk: ≥ 22</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Systolic BP (mmHg)</label>
+                        <input type="number" id="bp" placeholder="e.g. 110" required>
+                        <small class="text-muted">High Risk: ≤ 100</small>
+                    </div>
+                    <div class="form-group">
+                        <label>GCS Mental Status</label>
+                        <select id="gcs">
+                            <option value="15">15 - Alert/Normal</option>
+                            <option value="14">14 - Confused</option>
+                            <option value="13">13 - Lethargic</option>
+                            <option value="10">
+                                < 13 - Unconscious</option>
+                        </select>
+                        <small class="text-muted">High Risk: < 15</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block"
+                        style="background: #be185d; border-color: #be185d;">Assess Risk</button>
+                </form>
+            </div>
+
+            <!-- Results -->
+            <div class="card" style="text-align: center;">
+                <h3>Assessment Result</h3>
+                <div id="risk-badge" class="badgex"
+                    style="background: #f1f5f9; color: var(--text-muted); font-size: 1rem; margin: 1rem 0;">
+                    PENDING</div>
+
+                <div style="width: 120px; height: 120px; border-radius: 50%; border: 8px solid var(--border-color); display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 3rem; font-weight: 800;"
+                    id="score-circle">
+                    -
+                </div>
+                <p style="margin-top: 1rem;">qSOFA Score</p>
+
+                <div id="alert-box"
+                    style="background: var(--accent-red-bg); border: 1px solid var(--accent-red); color: var(--accent-red); padding: 1rem; border-radius: 6px; text-align: left; margin-top: 1.5rem; display: none;">
+                    <strong><i class="fa-solid fa-triangle-exclamation"></i> Immediate Action Required</strong>
+                    <ul id="risk-factors" style="margin-left: 1.25rem;"></ul>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // Set Hospital ID
+        const hospId = localStorage.getItem('hospital_id');
+        if (!hospId) window.location.href = 'hospital-login.html';
+        document.getElementById('disp-hospital-id').textContent = hospId;
+
+        // Logic
+        document.getElementById('hospital-screening-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const resp = parseInt(document.getElementById('resp').value);
+            const bp = parseInt(document.getElementById('bp').value);
+            const gcs = parseInt(document.getElementById('gcs').value);
+
+            let score = 0;
+            const reasons = [];
+
+            if (resp >= 22) { score++; reasons.push("Respiratory Rate ≥ 22"); }
+            if (bp <= 100) { score++; reasons.push("Systolic BP ≤ 100"); }
+            if (gcs < 15) { score++; reasons.push("Altered Mental Status"); }
+
+            // UI Updates
+            document.getElementById('score-circle').textContent = score;
+            const badge = document.getElementById('risk-badge');
+            const alertBox = document.getElementById('alert-box');
+            const riskFactors = document.getElementById('risk-factors');
+
+            if (score >= 2) {
+                badge.textContent = "HIGH RISK";
+                badge.style.background = "var(--accent-red-bg)";
+                badge.style.color = "var(--accent-red)";
+                document.getElementById('score-circle').style.borderColor = "var(--accent-red)";
+
+                riskFactors.innerHTML = reasons.map(r => `<li>${r}</li>`).join('');
+                alertBox.style.display = 'block';
+            } else {
+                badge.textContent = "LOW RISK";
+                badge.style.background = "var(--success-green-bg)";
+                badge.style.color = "var(--success-green)";
+                document.getElementById('score-circle').style.borderColor = "var(--success-green)";
+                alertBox.style.display = 'none';
+            }
+        });
+    </script>
+    <footer style="background: var(--primary-dark); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2026 SEPLUS. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Entry - SEPLUS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> SEPLUS</a>
+            <nav class="main-nav"><a href="index.html" class="nav-link">Home</a>
+                <span style="font-weight: 600; color: var(--primary-blue);">Hospital Portal</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 4rem 0;">
+        <h2 class="text-center" style="margin-bottom: 2rem;">Patient Screening Entry</h2>
+
+        <div class="grid-2" style="max-width: 900px; margin: 0 auto; gap: 2rem;">
+
+            <!-- Existing Patient -->
+            <div class="card animate-fade-in" style="border-top: 4px solid var(--primary-blue);">
+                <div class="text-center mb-md">
+                    <i class="fa-solid fa-user-check fa-2x"
+                        style="color: var(--primary-blue); margin-bottom: 0.5rem;"></i>
+                    <h3>Existing Patient</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Enter Patient ID to proceed.</p>
+                </div>
+                <form id="existing-form">
+                    <div class="form-group">
+                        <label>Patient ID</label>
+                        <input type="text" id="check-pid" placeholder="e.g. PAT-12345" required>
+                    </div>
+                    <div id="existing-error" style="color: red; font-size: 0.9rem; margin-bottom: 1rem; display: none;">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Find & Proceed</button>
+                </form>
+            </div>
+
+            <!-- New Patient -->
+            <div class="card animate-fade-in delay-100" style="border-top: 4px solid var(--success-green);">
+                <div class="text-center mb-md">
+                    <i class="fa-solid fa-user-plus fa-2x"
+                        style="color: var(--success-green); margin-bottom: 0.5rem;"></i>
+                    <h3>New Patient Registration</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Register a new patient for screening.</p>
+                </div>
+
+                <!-- Initial Button (To match Existing Patient card size) -->
+                <div id="new-start-view">
+                    <button class="btn btn-outline btn-block" onclick="toggleNewForm()"
+                        style="color: var(--success-green); border-color: var(--success-green);">
+                        <i class="fa-solid fa-plus"></i> Begin Registration
+                    </button>
+                </div>
+
+                <!-- Hidden Form -->
+                <form id="new-form" style="display: none; margin-top: 1rem;">
+                    <div class="grid-2" style="gap: 1rem;">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="new-name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Number</label>
+                            <input type="tel" id="new-phone" placeholder="e.g. 9876543210" required>
+                        </div>
+                    </div>
+                    <div class="grid-2" style="gap: 1rem;">
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input type="number" id="new-age" placeholder="e.g. 45" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select id="new-gender" required
+                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+                                <option value="">Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Medical History</label>
+                        <select id="new-history" required
+                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+                            <option value="">Select History</option>
+                            <option value="None">None / Healthy</option>
+                            <option value="Diabetes">Diabetes</option>
+                            <option value="Hypertension">Hypertension</option>
+                            <option value="Respiratory Issues">Respiratory Issues</option>
+                            <option value="Immunocompromised">Immunocompromised</option>
+                            <option value="Recent Surgery">Recent Surgery</option>
+                        </select>
+                    </div>
+                    <div id="new-msg"
+                        style="color: var(--success-green); font-size: 0.9rem; margin-bottom: 1rem; display: none; text-align: center;">
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button type="button" class="btn btn-outline" onclick="toggleNewForm()"
+                            style="flex: 1;">Cancel</button>
+                        <button type="submit" class="btn btn-block"
+                            style="background: var(--success-green); color: white; flex: 2;">Register & Proceed</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <footer style="background: var(--primary-dark); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2026 SEPLUS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Existing Patient Check
+        document.getElementById('existing-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const pid = document.getElementById('check-pid').value;
+            const errorDiv = document.getElementById('existing-error');
+
+            try {
+                const res = await fetch('/api/hospital/patient/check', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ patientId: pid })
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                    // Success
+                    sessionStorage.setItem('currentPatient', JSON.stringify(data.patient));
+                    window.location.href = 'dashboard.html';
+                } else {
+                    errorDiv.textContent = data.message;
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                errorDiv.textContent = "Server error.";
+                errorDiv.style.display = 'block';
+            }
+        });
+
+        // New Patient Register
+        document.getElementById('new-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+                fullName: document.getElementById('new-name').value,
+                phoneNumber: document.getElementById('new-phone').value,
+                age: parseInt(document.getElementById('new-age').value),
+                gender: document.getElementById('new-gender').value,
+                history: document.getElementById('new-history').value
+            };
+            const msgDiv = document.getElementById('new-msg');
+
+            try {
+                const res = await fetch('/api/hospital/patient/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                    msgDiv.style.color = 'var(--success-green)';
+                    msgDiv.innerHTML = `
+                        <div style="padding: 1.5rem; border: 2px dashed var(--success-green); border-radius: var(--radius-md); background: #f0fdf4; margin-top: 1rem;">
+                            <p style="font-weight: 700; font-size: 1.1rem; color: var(--success-green); margin-bottom: 0.5rem;">Registration Successful!</p>
+                            <p style="font-size: 1.2rem; color: var(--text-main);">Patient ID: <span style="font-weight: 800; color: #15803d; letter-spacing: 1px;">${data.patientId}</span></p>
+                            <p style="font-size: 0.85rem; margin-top: 0.5rem; color: var(--text-muted);">Please share this ID with the patient. You can now register another or use the ID to find them on the left.</p>
+                        </div>
+                    `;
+                    msgDiv.style.display = 'block';
+                    document.getElementById('new-form').reset();
+                } else {
+                    msgDiv.style.color = 'red';
+                    msgDiv.textContent = data.message;
+                    msgDiv.style.display = 'block';
+                }
+            } catch (err) {
+                console.error("Fetch Error:", err);
+                msgDiv.style.color = 'red';
+                msgDiv.textContent = "Registration failed. Please check your internet connection or if the server is running.";
+                msgDiv.style.display = 'block';
+            }
+        });
+
+        // Toggle Function
+        function toggleNewForm() {
+            const startView = document.getElementById('new-start-view');
+            const form = document.getElementById('new-form');
+            if (form.style.display === 'none') {
+                form.style.display = 'block';
+                startView.style.display = 'none';
+            } else {
+                form.style.display = 'none';
+                startView.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>

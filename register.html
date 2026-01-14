@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - SEPLUS</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo" id="top-logo">
+                <i class="fa-solid fa-heart-pulse"></i>
+                SEPLUS
+            </a>
+            <nav class="main-nav"><a href="index.html" class="nav-link">Home</a></nav>
+        </div>
+    </header>
+    <main class="container" style="padding: 4rem 0; display: flex; justify-content: center;">
+        <div class="card" style="width: 100%; max-width: 400px;">
+            <div class="text-center mb-lg">
+                <h2>Create Account</h2>
+                <p>Join SEPLUS today.</p>
+            </div>
+            <form id="reg-form">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="reg-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" id="reg-phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="reg-pass" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            </form>
+            <p class="text-center" style="margin-top: 1.5rem; font-size: 0.9rem;">
+                Already have an account? <a href="login.html" style="color: var(--primary-blue); font-weight: 600;">Log
+                    In</a>
+            </p>
+        </div>
+    </main>
+
+    <!-- Custom Modal -->
+    <div id="duplicate-modal"
+        style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000; animation: fadeIn 0.3s ease;">
+        <div class="card"
+            style="background: white; padding: 2rem; border-radius: var(--radius-lg); max-width: 400px; text-align: center; box-shadow: var(--shadow-lg); transform: scale(0.95); animation: scaleUp 0.3s ease forwards;">
+            <div
+                style="width: 60px; height: 60px; background: var(--accent-orange-bg); color: var(--accent-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem;">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3 style="margin-bottom: 0.5rem; color: var(--text-main);">Already Registered</h3>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">This mobile number is already associated with an
+                account. Please log in instead.</p>
+            <div style="display: flex; gap: 1rem;">
+                <button onclick="document.getElementById('duplicate-modal').style.display='none'"
+                    class="btn btn-outline" style="flex: 1;">Cancel</button>
+                <a href="login.html" class="btn btn-primary" style="flex: 1;">Log In</a>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes scaleUp {
+            to {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+
+    <script>
+        document.getElementById('reg-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fullName = document.getElementById('reg-name').value;
+            const phoneNumber = document.getElementById('reg-phone').value;
+            const password = document.getElementById('reg-pass').value;
+
+            try {
+                const res = await fetch('/api/personal/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fullName, phoneNumber, password })
+                });
+
+                const data = await res.json();
+
+                if (res.status === 400 && data.message && data.message.includes("already registered")) {
+                    document.getElementById('duplicate-modal').style.display = 'flex';
+                } else if (res.ok) {
+                    alert(`Registration Successful!\n\nYour Patient ID is: ${data.patientId}\nPassword: ${data.password}\n\nPlease save these to Login.`);
+                    window.location.href = 'login.html';
+                } else {
+                    alert("Error: " + (data.message || "Something went wrong"));
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Failed to connect to server.");
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+    <footer style="background: var(--primary-dark); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2026 SEPLUS. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SEPLUS</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Guard Check: Allow if logged in via Auth OR if redirected from Hospital Portal
+        const hospitalPatient = JSON.parse(sessionStorage.getItem('currentPatient'));
+        if (!Auth.getCurrentUser() && !hospitalPatient) {
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+
+<body style="padding-top: 0;">
+    <!-- Sidebar / Layout -->
+    <div style="display: flex; min-height: 100vh;">
+        <aside
+            style="width: 250px; background: white; border-right: 1px solid var(--border-color); padding: 1.5rem; display: flex; flex-direction: column;">
+            <div class="logo" style="margin-bottom: 2rem;">
+                <i class="fa-solid fa-heart-pulse"></i> SEPLUS
+            </div>
+            <nav style="display: flex; flex-direction: column; gap: 0.5rem; flex: 1;">
+                <!-- Navigation buttons removed as per user request -->
+            </nav>
+            <div style="border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                <div id="user-display" style="font-weight: 600; margin-bottom: 0.5rem; font-family: var(--font-body);">
+                    User</div>
+                <button onclick="Auth.logout()" class="btn btn-sm btn-outline"
+                    style="color: var(--accent-red); width: 100%; justify-content: flex-start; font-family: var(--font-body);"><i
+                        class="fa-solid fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </aside>
+
+        <main style="flex: 1; padding: 0.5rem 2rem;">
+            <header style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; align-items: center;">
+                <h2 style="font-family: var(--font-heading); margin-bottom: 0;">Patient Screening Dashboard</h2>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <div id="hospital-badge"
+                        style="display: none; background: #be185d; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">
+                        HOSPITAL MODE</div>
+                    <div class="badgex"
+                        style="background: var(--success-green-bg); color: var(--success-green); border: 1px solid var(--success-green); display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; box-shadow: 0 2px 10px rgba(21, 128, 61, 0.1);">
+                        <span class="status-pulse"
+                            style="width: 10px; height: 10px; background: #22c55e; border-radius: 50%; display: inline-block;"></span>
+                        System Active
+                    </div>
+                    <a href="index.html" class="btn btn-sm btn-primary"
+                        style="border-radius: 20px; padding: 0.5rem 1.25rem; font-size: 0.9rem; box-shadow: 0 4px 6px -1px rgba(76, 29, 149, 0.2);"><i
+                            class="fa-solid fa-house"></i> Home</a>
+                </div>
+            </header>
+
+            <div class="grid-3" style="align-items: start; gap: 1rem;">
+                <!-- Input Form -->
+                <div class="card" style="height: auto !important; padding: 1.5rem;">
+                    <h3 style="font-family: var(--font-heading);"><i class="fa-solid fa-pen-to-square"></i> New Reading
+                    </h3>
+                    <form id="screening-form">
+                        <div class="form-group">
+                            <label style="font-family: var(--font-body);">Respiratory Rate (breaths/min)</label>
+                            <input type="number" id="resp" placeholder="e.g. 18" required>
+                            <small class="text-muted" style="font-family: var(--font-body);">High Risk: ≥ 22</small>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-family: var(--font-body);">Systolic BP (mmHg)</label>
+                            <input type="number" id="bp" placeholder="e.g. 110" required>
+                            <small class="text-muted" style="font-family: var(--font-body);">High Risk: ≤ 100</small>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-family: var(--font-body);">GCS Mental Status</label>
+                            <select id="gcs" style="font-family: var(--font-body);">
+                                <option value="15">15 - Alert/Normal</option>
+                                <option value="14">14 - Confused</option>
+                                <option value="13">13 - Lethargic</option>
+                                <option value="10">
+                                    < 13 - Unconscious</option>
+                            </select>
+                            <small class="text-muted" style="font-family: var(--font-body);">High Risk: < 15</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block"
+                            style="font-family: var(--font-body);">Assess Risk</button>
+                    </form>
+                </div>
+
+                <!-- Results -->
+                <div class="card" style="text-align: center; height: auto !important; padding: 1.5rem;">
+                    <h3>Current Status</h3>
+                    <div id="risk-badge" class="badgex"
+                        style="background: var(--success-green-bg); color: var(--success-green); font-size: 1rem; margin: 1rem 0;">
+                        LOW RISK</div>
+
+                    <div style="width: 120px; height: 120px; border-radius: 50%; border: 8px solid var(--border-color); display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 3rem; font-weight: 800;"
+                        id="score-circle">
+                        0
+                    </div>
+                    <p style="margin-top: 1rem;">qSOFA Score</p>
+
+                    <div id="alert-box"
+                        style="background: var(--accent-red-bg); border: 1px solid var(--accent-red); color: var(--accent-red); padding: 1rem; border-radius: var(--radius-md); text-align: left; margin-top: 1.5rem; display: none;">
+                        <strong><i class="fa-solid fa-triangle-exclamation"></i> Warning: Risk Detected</strong>
+                        <ul id="risk-factors" style="margin-left: 1.25rem;"></ul>
+                    </div>
+                </div>
+
+                <!-- History Chart -->
+                <div class="card" style="height: auto !important; padding: 1.5rem;">
+                    <h3>Vitals Trend</h3>
+                    <div style="position: relative; height: 300px; width: 100%;">
+                        <canvas id="vitalsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Set User Name & Get ID
+        const currentUser = Auth.getCurrentUser();
+        const currentPatient = JSON.parse(sessionStorage.getItem('currentPatient'));
+
+        // Prioritize hospital patient from session
+        const patientId = currentPatient ? currentPatient.patientId : (currentUser ? currentUser.id : 'guest');
+        console.log("Active Patient ID:", patientId);
+
+        if (currentPatient) {
+            document.getElementById('user-display').textContent = currentPatient.fullName;
+            document.getElementById('hospital-badge').style.display = 'block';
+        } else if (currentUser) {
+            document.getElementById('user-display').textContent = currentUser.name;
+        }
+
+        // Chart Setup
+        const ctx = document.getElementById('vitalsChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Resp Rate',
+                    data: [],
+                    borderColor: '#4c1d95',
+                    tension: 0.3
+                }, {
+                    label: 'Sys BP',
+                    data: [],
+                    borderColor: '#16a34a',
+                    tension: 0.3
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+
+        // Load History
+        async function loadHistory() {
+            try {
+                const res = await fetch(`/api/patient/history/${patientId}`);
+                const readings = await res.json();
+
+                // Clear existing data
+                chart.data.labels = [];
+                chart.data.datasets[0].data = [];
+                chart.data.datasets[1].data = [];
+
+                // Populate chart (reverse to show oldest to newest)
+                readings.reverse().forEach(r => {
+                    chart.data.labels.push(new Date(r.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+                    chart.data.datasets[0].data.push(r.respRate);
+                    chart.data.datasets[1].data.push(r.sysBp);
+                });
+                chart.update();
+            } catch (err) {
+                console.error("Failed to load history:", err);
+            }
+        }
+
+        loadHistory();
+
+        // Submit Logic
+        document.getElementById('screening-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const resp = parseInt(document.getElementById('resp').value);
+            const bp = parseInt(document.getElementById('bp').value);
+            const gcs = parseInt(document.getElementById('gcs').value);
+
+            let score = 0;
+            const reasons = [];
+
+            if (resp >= 22) { score++; reasons.push("Respiratory Rate ≥ 22"); }
+            if (bp <= 100) { score++; reasons.push("Systolic BP ≤ 100"); }
+            if (gcs < 15) { score++; reasons.push("Altered Mental Status"); }
+
+            const riskStatus = score >= 2 ? "HIGH RISK" : "LOW RISK";
+
+            // Update UI
+            document.getElementById('score-circle').textContent = score;
+            const badge = document.getElementById('risk-badge');
+            const alertBox = document.getElementById('alert-box');
+            const riskFactors = document.getElementById('risk-factors');
+
+            if (score >= 2) {
+                badge.textContent = "HIGH RISK";
+                badge.style.background = "var(--accent-red-bg)";
+                badge.style.color = "var(--accent-red)";
+                document.getElementById('score-circle').style.borderColor = "var(--accent-red)";
+
+                riskFactors.innerHTML = reasons.map(r => `<li>${r}</li>`).join('');
+                alertBox.style.display = 'block';
+            } else {
+                badge.textContent = "LOW RISK";
+                badge.style.background = "var(--success-green-bg)";
+                badge.style.color = "var(--success-green)";
+                document.getElementById('score-circle').style.borderColor = "var(--success-green)";
+                alertBox.style.display = 'none';
+            }
+
+            // Save to Backend
+            try {
+                const newReading = {
+                    patientId,
+                    respRate: resp,
+                    sysBp: bp,
+                    gcs,
+                    qsofaScore: score,
+                    riskStatus
+                };
+
+                const res = await fetch('/api/patient/report', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newReading)
+                });
+
+                if (res.ok) {
+                    // Update Chart
+                    chart.data.labels.push(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+                    chart.data.datasets[0].data.push(resp);
+                    chart.data.datasets[1].data.push(bp);
+                    chart.update();
+                } else {
+                    const errData = await res.json();
+                    alert("Error saving data: " + (errData.message || res.statusText));
+                }
+            } catch (err) {
+                console.error("Error saving reading:", err);
+                alert("Failed to connect to server. Ensure 'node server.js' is running.");
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+    <footer style="background: var(--primary-dark); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2026 SEPLUS. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

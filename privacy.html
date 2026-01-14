@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy - SEPLUS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600href="
+        https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"family=Outfit:wght@400;500;600;700;800href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        display=swap"display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> SEPLUS</a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Home</a>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn">Services <i class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="doctors.html">Find a Doctor</a>
+                        <a href="hospitals.html">Nearby Hospitals</a>
+                        <a href="appointment.html">Book Appointment</a>
+                        <a href="donation.html">Donate</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn">Resources <i class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="news.html">Newsroom</a>
+                        <a href="articles.html">Articles</a>
+                        <a href="media.html">Media & Videos</a>
+                        <a href="events.html">Events</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <button class="nav-dropbtn" style="color: var(--primary-blue);">About <i
+                            class="fa-solid fa-chevron-down fa-xs"></i></button>
+                    <div class="nav-dropdown-content">
+                        <a href="about-us.html">About Us</a>
+                        <a href="contact.html">Contact Us</a>
+                        <a href="faq.html">FAQs</a>
+                        <a href="terms.html">Terms of Use</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main class="container" style="padding: 4rem 0;">
+        <h1>Privacy Policy</h1>
+        <div class="card">
+            <h3>1. Local-First Data Processing</h3>
+            <p>We respect your privacy. This application is designed to run locally in your browser. Calculations for
+                sepsis risk scores (qSOFA) are performed entirely on your device using Client-Side JavaScript. We do not
+                collect, store, or transmit your personal health information (PHI) to any external servers for analysis.
+            </p>
+
+            <h3 style="margin-top: 1.5rem;">2. Data Collection Usage</h3>
+            <ul style="margin-left: 1.5rem; color: var(--text-color);">
+                <li><strong>Registration/Login:</strong> Basic credentials (phone number/ID) are stored in your
+                    browser's LocalStorage or a local demonstration database to maintain session state.</li>
+                <li><strong>Usage Analytics:</strong> We do not track individual user behavior or diagnosis patterns.
+                </li>
+            </ul>
+
+            <h3 style="margin-top: 1.5rem;">3. Security</h3>
+            <p>Since data resides on your local machine, security depends on your device's integrity. We recommend using
+                SEPLUS on secure, private networks and devices.</p>
+
+            <h3 style="margin-top: 1.5rem;">4. Your Rights</h3>
+            <p>You have the right to clear your data at any time by clearing your browser cache or LocalStorage. No data
+                remains on our side because we never received it.</p>
+
+            <h3 style="margin-top: 1.5rem;">5. Contact Us</h3>
+            <p>If you have any questions about this policy, please contact us at <strong>privacy@seplus.org</strong> or
+                visit us at VIT Chennai.</p>
+        </div>
+    </main>
+    <script src="script.js"></script>
+    <footer style="background: var(--primary-dark); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2026 SEPLUS. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

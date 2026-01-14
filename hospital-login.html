@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Login - SEPLUS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body >
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo" id="top-logo">
+                <i class="fa-solid fa-heart-pulse"></i>
+                SEPLUS
+            </a>
+            <nav class="main-nav"><a href="index.html" class="nav-link">Home</a></nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 4rem 0; display: flex; justify-content: center;">
+        <div class="card animate-fade-in" style="width: 100%; max-width: 400px; border-top: 4px solid #be185d;">
+            <div class="text-center mb-lg">
+                <i class="fa-solid fa-hospital fa-3x" style="color: #be185d; margin-bottom: 1rem;"></i>
+                <h2>Hospital Login</h2>
+                <p>Enter your facility credentials to proceed.</p>
+            </div>
+
+            <form id="hospital-form">
+                <div class="form-group">
+                    <label>Hospital ID</label>
+                    <input type="text" id="hospitalId" placeholder="e.g. HOSP123" required
+                        style="font-size: 1.1rem; letter-spacing: 1px;">
+                </div>
+                <button type="submit" class="btn btn-block" style="background: #be185d; color: white;">Next <i
+                        class="fa-solid fa-arrow-right"></i></button>
+            </form>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <a href="screening-choice.html" style="color: var(--text-muted); font-size: 0.9rem;">Back to
+                    Selection</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('hospital-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('hospitalId').value;
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerHTML;
+
+            if (id.trim()) {
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking...';
+                try {
+                    const res = await fetch('/api/hospital/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ hospitalId: id })
+                    });
+
+                    const data = await res.json();
+
+                    if (res.ok) {
+                        localStorage.setItem('hospital_id', id);
+                        localStorage.setItem('hospital_name', data.name);
+                        window.location.href = 'hospital-patient-entry.html';
+                    } else {
+                        alert(data.message);
+                        btn.innerHTML = originalText;
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert("Server connection failed");
+                    btn.innerHTML = originalText;
+                }
+            }
+        });
+    </script>
+    <footer style="background: var(--primary-dark); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2026 SEPLUS. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
